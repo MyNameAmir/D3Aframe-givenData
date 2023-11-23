@@ -6,9 +6,29 @@ import { Axis } from "./axis.js";
 export class Model{
 
     //lets make this work for now
-    constructor(data, categories){
+    constructor(options){
+
+         // clearly we're ignoring options for now
+
+         let categories = {};
+
+         categories.display = {[Axis.Z] : ["Finland", "Norway", "Sweden"],
+ 
+         [Axis.X] : ["Q1", "Q2", "Q3", "Q4"] };
+ 
+        
+ 
+          let data = [
+ 
+              [70355, 70741, 68858, 64976],      // Finland
+ 
+              [128895, 132259, 125965, 114804],  // Norway
+ 
+              [149240, 147863, 141663, 134831]   //Sweden
+ 
+          ];  // the columns represent Q1 -> Q4
         this.data = data;
-        this.categories = categories;
+        this.categories = categories.display;
     }
 
     //how many items on the xaxis, zaxis? calculates that, based on the filtering (make it work without the filtering for now), 
@@ -63,29 +83,29 @@ export class Model{
         return extremes;
     }
     //get the height by pulling out the correct height value based on z and x axis
-    getHeight(onFirstAxis, onSecondAxis, onFirstAxisValue, onSecondAxisValue){
-        //come back to this one
-        return this.data[this.categories[onFirstAxis].indexOf(onFirstAxisValue)][this.categories[onSecondAxis].indexOf(onSecondAxisValue)];
+    getHeight(onZAxisValue, onXAxisValue){
+       
+        return this.data[this.categories[Axis.Z].indexOf(onZAxisValue)][this.categories[Axis.X].indexOf(onXAxisValue)];
     }
 
     //in case of a search for a specific value in the 2D array, this 
-    getAxes(value){
-        let axes = {[Axis.Z]: null, [Axis.X]: null};
-        let moreAxes = [];
+    getCoordinatesOf(value){
+        let coordinates = {[Axis.Z]: null, [Axis.X]: null};
+        let moreCoordinates = [];
         for(let i of this.data){
             for(let j of i){
                 if(j == value){
-                    axes[Axis.Z] = this.categories[Axis.Z][this.data.indexOf(i)];
-                    axes[Axis.X] = this.categories[Axis.X][i.indexOf(j)];
-                    moreAxes.push(axes);
+                    coordinates[Axis.Z] = this.categories[Axis.Z][this.data.indexOf(i)];
+                    coordinates[Axis.X] = this.categories[Axis.X][i.indexOf(j)];
+                    moreCoordinates.push(coordinates);
                 }
             }
         }
-        if(moreAxes.length == 0){
+        if(moreCoordinates.length == 0){
             return null;
         }
 
-        return moreAxes;
+        return moreCoordinates;
     }
     //return some information for now based on x and z axis data passed on
     getInfo(onFirstAxis, onSecondAxis){

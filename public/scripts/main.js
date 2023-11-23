@@ -1,25 +1,16 @@
 import { Axis } from "./axis.js" 
 import {Model} from "./Model.js"
-let categories = {};
-//thinking of doing vvv in the options but well come back to this
-categories.display = {[Axis.Z] : ["Finland", "Norway", "Sweden"],
-[Axis.X] : ["Q1", "Q2", "Q3", "Q4"] };
+import {Options} from "./options.js"
 
- let data = [
-     [70355, 70741, 68858, 64976],      // Finland
-     [128895, 132259, 125965, 114804],  // Norway
-     [149240, 147863, 141663, 134831]   //Sweden
- ];  // the columns represent Q1 -> Q4
-
-let theData = new Model(data, categories.display);
+let theData = new Model(Options);
 
 console.log(theData.numberOfValues(Axis.Z));
  
  console.log ("Countries are: " + theData.getValuesOnAxis(Axis.Z));
  console.log ("extremes are: " + theData.getExtremes().min + " & " + theData.getExtremes().max);
- console.log ("Value of the GDP for Norway on the second quarter is: " + theData.getHeight(Axis.Z, Axis.X, "Norway", "Q2"));
- let axes = theData.getAxes(theData.getHeight(Axis.Z, Axis.X, "Norway", "Q2"))
- console.log ("there are " + axes.length + " countries with the GDP " + theData.getHeight(Axis.Z, Axis.X, "Norway", "Q2"));
+ console.log ("Value of the GDP for Norway on the second quarter is: " + theData.getHeight("Norway", "Q2"));
+ let axes = theData.getCoordinatesOf(theData.getHeight("Norway", "Q2"))
+ console.log ("there are " + axes.length + " countries with the GDP " + theData.getHeight("Norway", "Q2"));
 
 //model view controller
 //model view controller
