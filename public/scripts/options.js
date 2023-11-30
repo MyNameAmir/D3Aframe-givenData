@@ -31,8 +31,10 @@ export let Options = {
     },
 
     chart:{
-       
-        
+       title: "whatever",
+       titlePosition: [],
+       AxesLabel: []
+        //look at how excel does this maybe
     },
 
     bar: {
@@ -42,7 +44,20 @@ export let Options = {
         depth: 2.5,
         width: 2.5,
         rotation: '0,0,0',//theres more
-        colours: ["yellow", "red", "blue", "green"]
+        colours: ["yellow", "red", "blue", "green", "black", "gold", "teal", "purple", "white"],
+        startingX: -15,
+        X: -15,
+        Y: -5,
+        
+    },
+
+    plane: {
+        //not in the options as they are not configurable by the user, but rather decided by the data
+        maxHeight: 0,
+        zAxisDepth: 0,
+        xAxisDepth: 0,
+        ZXaxisStartingXLocation: -20,
+        standardDepthPerUnit: 10
     }
     
 }

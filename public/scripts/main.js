@@ -1,16 +1,46 @@
-import { Axis } from "./axis.js" 
-import {Model} from "./Model.js"
-import {Options} from "./options.js"
+import { Axis } from "./axis.js"
+import { Model } from "./Model.js"
+import { Options } from "./options.js"
+import { draw } from "./draw.js"
+import { Bar } from "./bar.js"
 
 let theData = new Model(Options);
+//put the stuff below in a class of its own?
+Options.plane.zAxisDepth = theData.data.length * Options.plane.standardDepthPerUnit;
+Options.plane.xAxisDepth = theData.data[0].length * Options.plane.standardDepthPerUnit;
+Options.plane.ZXaxisStartingXLocation = Options.plane.ZXaxisStartingXLocation + (theData.data[0].length * 5);
+console.log(Options.plane.ZXaxisStartingXLocation)
+let bars = []
+let j = 0;
+let barColour
 
-console.log(theData.numberOfValues(Axis.Z));
- 
- console.log ("Countries are: " + theData.getValuesOnAxis(Axis.Z));
- console.log ("extremes are: " + theData.getExtremes().min + " & " + theData.getExtremes().max);
- console.log ("Value of the GDP for Norway on the second quarter is: " + theData.getHeight("Norway", "Q2"));
- let axes = theData.getCoordinatesOf(theData.getHeight("Norway", "Q2"))
- console.log ("there are " + axes.length + " countries with the GDP " + theData.getHeight("Norway", "Q2"));
+
+//testing
+console.log("Countries are: " + theData.getValuesOnAxis(Axis.Z));
+console.log("extremes are: " + theData.getExtremes().min + " & " + theData.getExtremes().max);
+console.log("Value of the GDP for Norway on the second quarter is: " + theData.getHeight("Norway", "Q2"));
+// let axes = theData.getCoordinatesOf(theData.getHeight("Finland", "Q4"))
+// console.log("there are " + axes.length + " countries with the GDP " + theData.getHeight("Finland", "Q4"));
+//class Bars? maybe
+
+//bars = new Bars(theData)
+
+
+for (let i of theData.data) {
+    barColour = Options.bar.colours[j++]
+    console.log(barColour)
+    for (let j of i){
+        bars.push(new Bar(j, barColour, Options.bar.X, Options.bar.Y));
+        Options.bar.X += 10;
+    }
+    Options.bar.Y -= 10;
+    Options.bar.X = Options.bar.startingX;
+}
+
+//console.log(Options.plane.zAxisDepth)
+
+
+draw(bars);
 
 //model view controller
 //model view controller
@@ -23,8 +53,8 @@ console.log(theData.numberOfValues(Axis.Z));
 //https://support.microsoft.com/en-us/office/change-the-display-of-a-3-d-chart-60c13909-d2a1-4e06-8b8c-bccba7868c9b
 //small filter
 
-//august: at the end of each week, point form, what I did this week. and 
-//a short point for what I will do next week. Kim email. 
+//august: at the end of each week, point form, what I did this week. and
+//a short point for what I will do next week. Kim email.
 //bar chart 3d with a slider
 
 // // // Declare the x (horizontal position) scale.
@@ -48,7 +78,7 @@ console.log(theData.numberOfValues(Axis.Z));
 //                  .attr("margin", "0 0 0.05 0")
 
 
-//         <a-gui-slider 	
+//         <a-gui-slider
 // 	width="2.5" height="0.75"
 // 	onclick="slideActionFunction"
 // 	percent="0.29"
