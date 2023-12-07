@@ -1,5 +1,5 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
-import { Location } from "./Location.js"
+import { Location } from "./location.js"
 import { Options } from "./options.js"
 
 
