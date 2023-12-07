@@ -1,5 +1,5 @@
 import { Options } from "./options.js"
-import { Bar } from "./Bar.js"
+import { Bar } from "./bar.js"
 
 
 export function generateBars(theData){
