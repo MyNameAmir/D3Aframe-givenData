@@ -1,8 +1,8 @@
 import { Options } from "./options.js";
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
-import { planes } from "./plane.js";
+import { Plane } from "./plane.js";
 
-export function draw(bars) {
+export function draw(bars, theData) {
 
     //make a intialization function/constructor for the code below and planes
     const width = 640;
@@ -13,11 +13,23 @@ export function draw(bars) {
         .attr("id", "test")
 
 
+
+    let zAxisDepth = theData.data.length * Options.plane.standardDepthPerUnit;
+    let xAxisDepth = theData.data[0].length * Options.plane.standardDepthPerUnit;
+    let ZXaxisStartingXLocation = Options.plane.ZXaxisStartingXLocation + (theData.data[0].length * 5);
     //you can use the getExtremes??
-    Options.plane.maxHeight = Math.max(...bars.map(bar => bar.height));
+    let backPlaneMaxHeight = Math.max(...bars.map(bar => bar.height));
     //console.log(Options.plane.maxHeight)
 
-    planes(svg1);
+
+
+    let bottomPlane = new Plane("bottomPlane", `${zAxisDepth}`, `${xAxisDepth}`, `${ZXaxisStartingXLocation} -10 -${zAxisDepth/2}`, `90 0 0`, "#7BC8A4");
+    let backPlane = new Plane("backPlane", `${backPlaneMaxHeight}`, `${xAxisDepth}`, `${ZXaxisStartingXLocation} ${(backPlaneMaxHeight/2) - 10} -${zAxisDepth}`, `0 0 0`, "#888888");
+    let leftSidePlane = new Plane("leftSidePlane", `${backPlaneMaxHeight}`, `${zAxisDepth}`, `-20 ${(backPlaneMaxHeight/2) - 10} -${zAxisDepth/2}`, `0 -90 0`, "#7BC8A4");
+
+    bottomPlane.render(svg1);
+    backPlane.render(svg1);
+    leftSidePlane.render(svg1);
 
 
     for (let i = 0; i < bars.length; i++) {
@@ -26,14 +38,7 @@ export function draw(bars) {
 
         //with a height of 100, the position needs to be at 47
         //with a height of 10, it needs to be -2
-        svg1.append("a-box")
-            .attr("id", `abox${i}`)
-            .attr("position", `${bars[i].location.x} ${(bars[i].location.y / 2) -10} ${bars[i].location.z}`)//the position has to be done this way because AFrame puts the position of the boxes at the half point on the height???
-            .attr("height", `${bars[i].location.y}`)
-            .attr("width", Options.bar.width)
-            .attr("depth", Options.bar.depth)
-            .attr("rotation", `0 0 0`)
-            .attr("color", bars[i].colour);
+        bars[i].render(svg1);
 
     }
 

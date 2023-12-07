@@ -2,17 +2,17 @@ import { Axis } from "./axis.js"
 import { Model } from "./Model.js"
 import { Options } from "./options.js"
 import { draw } from "./draw.js"
-import { Bar } from "./bar.js"
+import { generateBars } from "./generateBars.js"
 
 let theData = new Model(Options);
 //put the stuff below in a class of its own?
-Options.plane.zAxisDepth = theData.data.length * Options.plane.standardDepthPerUnit;
-Options.plane.xAxisDepth = theData.data[0].length * Options.plane.standardDepthPerUnit;
-Options.plane.ZXaxisStartingXLocation = Options.plane.ZXaxisStartingXLocation + (theData.data[0].length * 5);
-console.log(Options.plane.ZXaxisStartingXLocation)
-let bars = []
-let j = 0;
-let barColour
+//let bars = []
+let bars = generateBars(theData);
+
+
+//console.log(Options.plane.zAxisDepth)
+
+draw(bars, theData);
 
 
 //testing
@@ -26,21 +26,6 @@ console.log("Value of the GDP for Norway on the second quarter is: " + theData.g
 //bars = new Bars(theData)
 
 
-for (let i of theData.data) {
-    barColour = Options.bar.colours[j++]
-    console.log(barColour)
-    for (let j of i){
-        bars.push(new Bar(j, barColour, Options.bar.X, Options.bar.Y));
-        Options.bar.X += 10;
-    }
-    Options.bar.Y -= 10;
-    Options.bar.X = Options.bar.startingX;
-}
-
-//console.log(Options.plane.zAxisDepth)
-
-
-draw(bars);
 
 //model view controller
 //model view controller

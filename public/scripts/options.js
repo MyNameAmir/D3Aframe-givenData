@@ -25,10 +25,6 @@ export let Options = {
 
 
     //add the walls configurations here too
-    wall:{
-        //xaxis: this.data.selectedFields[0],
-
-    },
 
     chart:{
        title: "whatever",
@@ -43,19 +39,15 @@ export let Options = {
         minScale: 0,
         depth: 2.5,
         width: 2.5,
-        rotation: '0,0,0',//theres more
         colours: ["yellow", "red", "blue", "green", "black", "gold", "teal", "purple", "white"],
         startingX: -15,
-        X: -15,
-        Y: -5,
+        startingY: -5,
         
     },
 
     plane: {
         //not in the options as they are not configurable by the user, but rather decided by the data
-        maxHeight: 0,
-        zAxisDepth: 0,
-        xAxisDepth: 0,
+        depth: 0.5,
         ZXaxisStartingXLocation: -20,
         standardDepthPerUnit: 10
     }

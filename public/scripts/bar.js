@@ -7,7 +7,8 @@ export class Bar {
 
 
     //i am hoping to make the GDP and the Country part be replacable
-    constructor(data, colour, x = 0, y = 0) {
+    constructor(id, data, colour, x = 0, y = 0) {
+        this.id = `abox${id}`
         this.data = data;
         //TODO: move the line below to process in the data retrieving, data processing is there, move this there, DONE
         this.height = this.getHeight(data);
@@ -27,6 +28,15 @@ export class Bar {
         this.location.z = z;
     }
 
+
+    render(svg1){
+        svg1.append("a-box").attr("id", `${this.id}`)
+        .attr("position", `${this.location.x} ${(this.location.y / 2) -10} ${this.location.z}`)//the position has to be done this way because AFrame puts the position of the boxes at the half point on the height???
+        .attr("height", `${this.location.y}`)
+        .attr("width", Options.bar.width)
+        .attr("depth", Options.bar.depth)
+        .attr("color", this.colour);
+    }
     // domains(data, value){
     //     let uniqueData = [];
     
