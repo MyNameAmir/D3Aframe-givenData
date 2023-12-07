@@ -14,7 +14,7 @@ export class Model {
         let categories = {};
 
         categories.display = {
-            [Axis.Z]: ["Finland", "Norway", "Sweden"],
+            [Axis.Z]: ["Latvia", "Lithuania", "Finland", "Norway", "Sweden", "Nomansland"],
 
             [Axis.X]: ["Q1", "Q2", "Q3", "Q4", "Q5"] //Q5 haha
         };
@@ -30,7 +30,7 @@ export class Model {
             [128895, 132259, 125965, 8888, 8888, 8888, 8888, 123781],  // Norway
 
             [149240, 147863, 64976, 8888, 8888, 8888, 8888, 65565], //Sweden
-            
+
             [149240, 147863, 64976, 8888, 8888, 8888, 8888, 65655] //nomansland
 
         ];  // the columns represent Q1 -> Q4

@@ -1,6 +1,7 @@
 import { Options } from "./options.js"
 import { Bar } from "./Bar.js"
 
+
 export function generateBars(theData){
     let bars = [];
     let idCount = 0;
@@ -8,6 +9,7 @@ export function generateBars(theData){
     let barColour;
     let barX = Options.bar.startingX;
     let barY = Options.bar.startingY;
+    
     for (let i of theData.data) {
         barColour = Options.bar.colours[colourIndex++]
         console.log(barColour)

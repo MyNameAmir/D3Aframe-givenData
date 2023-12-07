@@ -1,6 +1,9 @@
 import { Options } from "./options.js";
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 import { Plane } from "./plane.js";
+import { Axis } from "./axis.js";
+import { generateLine } from "./generateLine.js";
+import { generateAxisLabel } from "./generateAxisLabel.js";
 
 export function draw(bars, theData) {
 
@@ -31,6 +34,15 @@ export function draw(bars, theData) {
     backPlane.render(svg1);
     leftSidePlane.render(svg1);
 
+
+    let lineX = Options.chart.xAxisLineStartingX;
+    let lineY = Options.chart.xAxisLineStartingY;
+    for(let i of theData.data){
+        //xaxis line generation
+        generateLine(lineX, -9.7, lineY, zAxisDepth, Axis.X, svg1);
+        //generateAxisLabel(zAxisDepth, -9.7, lineY, theData.categories)
+        lineY -= 10;
+    }
 
     for (let i = 0; i < bars.length; i++) {
         //array = array.sort();

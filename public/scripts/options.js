@@ -27,9 +27,13 @@ export let Options = {
     //add the walls configurations here too
 
     chart:{
-       title: "whatever",
-       titlePosition: [],
-       AxesLabel: []
+        xAxisLineStartingY: -5,
+        xAxisLineStartingX: -20,
+        textColour: "black",
+        lineColour: 'red',
+        title: "whatever",
+        titlePosition: [],
+        AxesLabel: []
         //look at how excel does this maybe
     },
 
