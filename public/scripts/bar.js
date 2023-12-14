@@ -5,13 +5,13 @@ import { Options } from "./options.js"
 
 export class Bar {
 
-
+    //pass options to this
     //i am hoping to make the GDP and the Country part be replacable
-    constructor(id, data, colour, x = 0, y = 0) {
+    constructor(id, data, colour, x = 0, y = 0, maxValue) {
         this.id = `abox${id}`
         this.data = data;
         //TODO: move the line below to process in the data retrieving, data processing is there, move this there, DONE
-        this.height = this.getHeight(data);
+        this.height = this.getHeight(maxValue);
         //this.color = this.getColor(data[Object.keys(data)[Object.keys(data).indexOf(Options.bar.colourDecider)]]);
         this.location = new Location(x, this.height, y);
         this.colour = colour;
@@ -21,7 +21,9 @@ export class Bar {
     //etColor = d3.scaleOrdinal(Options.bar.colours).domain(this.colour);
 
     //all 4 of these numbers are in the configurations object
-    getHeight = d3.scaleLinear([Options.bar.minScale, Options.bar.maxScale], [0, 100]);
+    //not part of options, is calculated by the model
+    //make it into a function, this is a function, change the minScale and maxScale to appropriate numbers based on data
+    getHeight = d3.scaleLinear([Options.bar.extremes.minScale, Options.bar.extremes.maxScale], [0, 100]);
 
     setLocation(x, z) {
         this.location.x = x;

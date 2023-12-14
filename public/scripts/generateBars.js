@@ -14,10 +14,14 @@ export function generateBars(theData){
         barColour = Options.bar.colours[colourIndex++]
         console.log(barColour)
         for (let j of i){
-            bars.push(new Bar(idCount, j, barColour, barX, barY));
+            bars.push(new Bar(idCount, j, barColour, barX, barY, theData.maxValue));
+            //add the 10 to options
             barX += 10;
             idCount++;
         }
+        //add the 10 to options
+
+        //fix the y and z anomaly
         barY -= 10;
         barX = Options.bar.startingX;
     }

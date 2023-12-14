@@ -27,33 +27,50 @@ export let Options = {
     //add the walls configurations here too
 
     chart:{
-        xAxisLineStartingY: -5,
+        //maybe make the lines and the text and whatever else the chart needs into subobjects of the chart
+
+        xAxisLineStartingZ: -5,
         xAxisLineStartingX: -20,
+        zAxisLineStartingZ: -0,
+        zAxisLineStartingX: -15,
+        yAxisLineStartingY: -9.7,
         textColour: "black",
         lineColour: 'red',
-        title: "whatever",
-        titlePosition: [],
-        AxesLabel: []
+        //the title of the entire chart
+        title: "GDP of some countries for the year 2014 sample",
+        titlePosition: [6, -11, 0.5],
+        textWidth: 40,
+        textHeight: 50,
+        //label for the entire axis
+        AxesLabel: ["GDP in Millions", "Countries", "Quarters"]
+
+        //rotation??
         //look at how excel does this maybe
     },
 
     bar: {
         colourDecider: "Country",
-        maxScale: 200000,
-        minScale: 0,
+        //keeping this for
+        extremes:{
+            minScale: 0,
+            maxScale: 0
+        },
         depth: 2.5,
         width: 2.5,
         colours: ["yellow", "red", "blue", "green", "black", "gold", "teal", "purple", "white"],
         startingX: -15,
-        startingY: -5,
+        startingY: -5
         
     },
 
     plane: {
-        //not in the options as they are not configurable by the user, but rather decided by the data
+        planeColour: {bottomPlane: "#7BC8A4", backPlane: "#888888", leftPlane: "#7BC8A4"},
         depth: 0.5,
         ZXaxisStartingXLocation: -20,
         standardDepthPerUnit: 10
-    }
+    },
+
+    //where you would record information about the labels (font, fontsize, color, position based on whatever plane they sit on/beside, gap size between label and the plane)
+    labels:{}
     
 }

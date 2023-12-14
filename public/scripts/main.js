@@ -5,6 +5,8 @@ import { draw } from "./draw.js"
 import { generateBars } from "./generateBars.js"
 
 let theData = new Model(Options);
+
+
 //put the stuff below in a class of its own?
 //let bars = []
 let bars = generateBars(theData);

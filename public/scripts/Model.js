@@ -16,26 +16,30 @@ export class Model {
         categories.display = {
             [Axis.Z]: ["Latvia", "Lithuania", "Finland", "Norway", "Sweden", "Nomansland"],
 
-            [Axis.X]: ["Q1", "Q2", "Q3", "Q4", "Q5"] //Q5 haha
+            [Axis.X]: ["Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8"] //Q5 haha
         };
 
 
-
+        //if any of the data points is insanely big, then the chart would not show the small values because of the scaling
         let data = [
-            [70355, 70741, 68858, 8888, 8888, 8888, 8888, 231231],//latvia
-            [70355, 70741, 68858, 8888, 8888, 8888, 8888, 23123], //Lithuania
+            [70355, 70741, 68858, 18888, 38888, 18888, 18888, 31231],//latvia
+            [70355, 70741, 68858, 18888, 18888, 18888, 18888, 23123], //Lithuania
 
-            [70355, 70741, 68858, 8888, 8888, 8888, 8888, 9999],      // Finland
+            [70355, 70741, 68858, 18888, 18888, 18888, 18888, 9999],      // Finland
 
-            [128895, 132259, 125965, 8888, 8888, 8888, 8888, 123781],  // Norway
+            [128895, 132259, 125965, 18888, 18888, 8888, 18888, 123781],  // Norway
 
-            [149240, 147863, 64976, 8888, 8888, 8888, 8888, 65565], //Sweden
+            [149240, 147863, 64976, 18888, 18888, 8888, 18888, 65565], //Sweden
 
-            [149240, 147863, 64976, 8888, 8888, 8888, 8888, 65655] //nomansland
+            [149240, 147863, 64976, 18888, 18888, 8888, 18888, 65655] //nomansland
 
         ];  // the columns represent Q1 -> Q4
         this.data = data;
         this.categories = categories.display;
+
+
+
+        this.maxValue = this.getExtremes().max;
     }
 
     //how many items on the xaxis, zaxis? calculates that, based on the filtering (make it work without the filtering for now), 

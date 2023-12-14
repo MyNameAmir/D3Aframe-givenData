@@ -1,4 +1,3 @@
-import { Axis } from "./axis.js";
 import { Options } from "./options.js";
 
 export function generateAxisLabel(x, y, z, text, svg1) { 
@@ -6,8 +5,8 @@ export function generateAxisLabel(x, y, z, text, svg1) {
     .attr("value", `${text}`)
     .attr("color", Options.chart.textColour)
     .attr("position", `${x} ${y} ${z}`)
-    .attr("width", 25)
-    .attr("height", 10)
+    .attr("width", Options.chart.textWidth)
+    .attr("height", Options.chart.textHeight)
     .attr("text")
 
 
