@@ -11,7 +11,7 @@ export class Bar {
         this.id = `abox${id}`
         this.data = data;
         //TODO: move the line below to process in the data retrieving, data processing is there, move this there, DONE
-        this.height = this.getHeight(maxValue);
+        this.height = this.getHeight(data);
         //this.color = this.getColor(data[Object.keys(data)[Object.keys(data).indexOf(Options.bar.colourDecider)]]);
         this.location = new Location(x, this.height, y);
         this.colour = colour;
