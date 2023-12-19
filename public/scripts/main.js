@@ -1,21 +1,19 @@
 import { Axis } from "./axis.js"
 import { Model } from "./Model.js"
 import { Options } from "./options.js"
-import { draw } from "./draw.js"
-import { generateBars } from "./generateBars.js"
+import { PlotArea } from "./PlotArea.js"
 
 let theData = new Model(Options);
-
-
-//put the stuff below in a class of its own?
+//put the stuff below in a class of its own? done
 //let bars = []
-let bars = generateBars(theData);
+let myPlotArea = new PlotArea(theData, Options);
+myPlotArea.draw();
 
 
 //console.log(Options.plane.zAxisDepth)
 
-draw(bars, theData);
-
+//draw(bars, theData, Options);
+console.log(Options.plane[Axis.Z])
 
 //testing
 console.log("Countries are: " + theData.getValuesOnAxis(Axis.Z));
