@@ -6,7 +6,10 @@ import { Axis } from "./axis.js";
 
 export class Model {
 
-    //lets make this work for now
+    /**
+     * Should be there to create and extract the data, and make things work based on the Options
+     * @param {Options} options 
+     */
     constructor(options) {
 
         // clearly we're ignoring options for now
@@ -46,6 +49,11 @@ export class Model {
 
     //how many items on the xaxis, zaxis? calculates that, based on the filtering (make it work without the filtering for now), 
     //goal is to filter in the 2014 GDP data, returns back some number indicating the number of values on that axis
+    /**
+     * determines the number of values on each axis
+     * @param {Axis} onAxis 
+     * @returns 
+     */
     numberOfValues(onAxis) {
         //I assume this function will be used to determine the number of values that fall on each axis based on the filtered data, but for now it just gets the length of the arrays on each axis and returns the length
         return this.categories[onAxis].length;
@@ -83,6 +91,10 @@ export class Model {
     // }
 
     //in the case of this data, the Y axis needs the extremes, in the case of GDP would be 0 to the highest GDP value (in the filtered data)
+    /**
+     * based on the data it determines the min and max of the data
+     * @returns an extreme object
+     */
     getExtremes() {
         let extremes = { min: this.data[0][0], max: this.data[0][0] }
         for (let i of this.data) {
@@ -97,9 +109,8 @@ export class Model {
 
         return extremes;
     }
-    //get the height by pulling out the correct height value based on z and x axis
     /**
-     * 
+     * get the height by pulling out the correct height value based on z and x axis
      * @param {*} onZAxisValue this indicates the Z axis value
      * @param {*} onXAxisValue 
      * @returns 
@@ -110,6 +121,11 @@ export class Model {
     }
 
     //in case of a search for a specific value in the 2D array, this 
+    /**
+     * searches for the coordinates of whatever value you pass on to it
+     * @param {number} value 
+     * @returns coordinates of the value
+     */
     getCoordinatesOf(value) {
         let coordinates = { [Axis.Z]: null, [Axis.X]: null };
         let moreCoordinates = [];
