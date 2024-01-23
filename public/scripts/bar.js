@@ -33,7 +33,7 @@ export class Bar {
     }
 
     //TODO: the zero-th index of Axis.Z of the categories is the zero-th index of the colours in the options and the data
-    //etColor = d3.scaleOrdinal(Options.bar.colours).domain(this.colour);
+    //getColor = d3.scaleOrdinal(Options.bar.colours).domain(this.colour);
 
     //all 4 of these numbers are in the configurations object
     //not part of options, is calculated by the model
@@ -61,7 +61,7 @@ export class Bar {
      */
     render = function(svg1){
         svg1.append("a-box").attr("id", `${this.id}`)
-        .attr("position", `${this.location.x} ${(this.location.y / 2) -10} ${this.location.z}`)//the position has to be done this way because AFrame puts the position of the boxes at the half point on the height???
+        .attr("position", `${this.location.x} ${(this.location.y / 2) - Options.bar.offset} ${this.location.z}`)//the position has to be done this way because AFrame puts the position of the boxes at the half point on the height???
         .attr("height", `${this.location.y}`)
         .attr("width", this.width)
         .attr("depth", this.depth)

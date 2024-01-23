@@ -3,10 +3,8 @@ import { Options } from "../options.js"
 
 /**
  * generates lines based on the Axis that is passed onto it, so far only has the X and Z axis
- * @param {number} x 
- * @param {number} y 
- * @param {number} z 
- * @param {number} length 
+ * @param {Location} location
+ * @param {number} length length of the line
  * @param {Axis} axis 
  * @param {svg} svg1 
  */

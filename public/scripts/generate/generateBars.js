@@ -20,7 +20,7 @@ export function generateBars(theData, Options){
         barColour = Options.bar.colours[colourIndex++]
         console.log(barColour)
         for (let j of i){
-            bars.push(new Bar(idCount, j, barColour, barX, barZ, Options.bar.width, Options.bar.depth));
+            bars.push(new Bar(idCount, j, barColour, barX, barZ, Options.bar.width, Options.bar.depth, Options));
             //add the 10 to options, done
             barX += Options.chart.xAxisGap;
             idCount++;
@@ -28,7 +28,7 @@ export function generateBars(theData, Options){
         //add the 10 to options, done
 
         //fix the y and z anomaly, done
-        barZ -= Options.chart.xAxisGap;
+        barZ -= Options.chart.zAxisGap;
         barX = Options.bar.startingX;
     }
     return bars;

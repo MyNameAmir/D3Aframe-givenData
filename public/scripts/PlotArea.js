@@ -19,12 +19,11 @@ export class PlotArea {
     constructor(theData, Options) {
         this.bars = generateBars(theData, Options);
         //make a intialization function/constructor for the code below and planes
-        const width = 640;
-        const height = 400;
+
         //a-frame starts at 0, 0, 0 when visualized, can be changed (TODO)
         const svg1 = d3.create("a-scene")
-            .attr("width", width)
-            .attr("height", height)
+            .attr("width", Options.chart.width)
+            .attr("height", Options.chart.height)
             .attr("id", "test")
 
 
@@ -34,7 +33,8 @@ export class PlotArea {
         //take the 5 and put it in the options
         const ZXaxisStartingXLocation = Options.plane.ZXaxisStartingXLocation + (theData.data[0].length * Options.chart.zAxisStartingLocationConst);
         //you can use the getExtremes??
-        const backPlaneMaxHeight = Math.max(...this.bars.map(bar => bar.height));
+        const backPlaneMaxHeight = 100;
+        console.log(backPlaneMaxHeight);
         //console.log(Options.plane.maxHeight)
 
         //colours need to be in the options for the planes, same with the embedded constants in the options
@@ -49,35 +49,35 @@ export class PlotArea {
 
         let lineX = Options.chart.xAxisLineStartingX;
         let lineZ = Options.chart.xAxisLineStartingZ;
-        
+
         let j = 0;
         for (let i of theData.data) {
             //xaxis line generation
-            generateLine(new Location(lineX, -10 + Options.chart.planeOffset, lineZ), zAxisDepth, Axis.X, svg1);
+            generateLine(new Location(lineX, Options.chart[Axis.X].lineStartingY, lineZ), zAxisDepth, Axis.X, svg1);
             //make the placement of the text be configurable based on the plane it is beside, add a gap also, and that gap is configurable
             //make these configurable items be a subobject of the options and then you pass that subject to the generate axis label
-            generateLabel(new Location(zAxisDepth, -10 + Options.chart.planeOffset, lineZ), theData.categories[Axis.Z][j], svg1, Options.chart.tickLabel)
+            generateLabel(new Location(zAxisDepth, Options.chart[Axis.X].labelY, lineZ), theData.categories[Axis.Z][j], svg1, Options.chart.tickLabel)
             lineZ -= Options.chart.zAxisGap;
             j++
         }
         lineZ = Options.chart.zAxisLineStartingZ;
 
-        let maxDataValueDivision = theData.maxValue / Options.chart.divisions;
-        let yAxisLabel = maxDataValueDivision;
-        for (let y = -10 + Math.ceil(backPlaneMaxHeight / Options.chart.divisions); y + Math.ceil(backPlaneMaxHeight / Options.chart.divisions) < backPlaneMaxHeight; y += Math.ceil(backPlaneMaxHeight / Options.chart.divisions)) {
+        let maxDataValueDivision = Options.bar.extremes.maxScale / Options.chart.divisions;
+        let yAxisLabel = 0;
+        for (let y = -10; y < backPlaneMaxHeight; y += Math.ceil(backPlaneMaxHeight / Options.chart.divisions)) {
             generateLine(new Location(lineX, y, -zAxisDepth + Options.chart.planeOffset), zAxisDepth, Axis.X, svg1);
-            generateLabel(new Location(zAxisDepth, y, -zAxisDepth + Options.chart.planeOffset), yAxisLabel.toFixed(Options.chart.decimalPlaces), svg1, Options.chart.tickLabel);
+            generateLabel(new Location(zAxisDepth, y, -zAxisDepth + Options.chart.planeOffset), Options.chart.numberFormat(yAxisLabel), svg1, Options.chart.tickLabel);
             generateLine(new Location(lineX + Options.chart.planeOffset, y, lineZ), zAxisDepth, Axis.Z, svg1);
-            generateLabel(new Location(lineX - Math.abs(yAxisLabel.toFixed(Options.chart.decimalPlaces)).toString().length - 3, y, Options.chart.planeOffset), yAxisLabel.toFixed(Options.chart.decimalPlaces), svg1, Options.chart.tickLabel);
+            generateLabel(new Location(lineX - Options.chart.numberFormat(yAxisLabel).toString().length, y, Options.chart.planeOffset), Options.chart.numberFormat(yAxisLabel), svg1, Options.chart.tickLabel);
             yAxisLabel += maxDataValueDivision;
         }
 
         lineZ = Options.chart.zAxisLineStartingZ;
         lineX = Options.chart.zAxisLineStartingX;
-
+        //the quarters so this is the z axis
         for (let i = 0; i < theData.data[0].length; i++) {
-            generateLine(new Location(lineX, -10 + Options.chart.planeOffset, lineZ), zAxisDepth, Axis.Z, svg1);
-            generateLabel(new Location(lineX, -10 + Options.chart.planeOffset, Options.chart.planeOffset), theData.categories[Axis.X][i], svg1, Options.chart.tickLabel)
+            generateLine(new Location(lineX, Options.chart[Axis.Z].lineStartingY, lineZ), zAxisDepth, Axis.Z, svg1);
+            generateLabel(new Location(lineX, Options.chart[Axis.Z].labelY, Options.chart.planeOffset), theData.categories[Axis.X][i], svg1, Options.chart.tickLabel)
             lineX += Options.chart.xAxisGap;
         }
 
@@ -101,7 +101,6 @@ export class PlotArea {
             //with a height of 100, the position needs to be at 47
             //with a height of 10, it needs to be -2
             this.bars[i].render(this.svg1);
-
         }
     }
 }

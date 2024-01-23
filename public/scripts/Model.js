@@ -27,7 +27,7 @@ export class Model {
 
         //if any of the data points is insanely big, then the chart would not show the small values because of the scaling
         let data = [
-            [70355, 70741, 68858, 18888, 38888, 18888, 18888, 131231],//latvia
+            [70355, 70741, 68858, 18888, 38888, 18888, 18888, 171231],//latvia
             [70355, 70741, 68858, 18888, 18888, 18888, 18888, 23123], //Lithuania
 
             [70355, 70741, 68858, 18888, 18888, 18888, 18888, 9999],      // Finland

@@ -1,9 +1,7 @@
 /**
  * generates a label as an A-text and appends it with the given location, text content and options to the a-frame
  * 
- * @param {number} x 
- * @param {number} y 
- * @param {number} z 
+ * @param {Location} location
  * @param {string} text 
  * @param {svg} svg1 
  * @param {string} label 
